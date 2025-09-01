@@ -54,11 +54,12 @@ pipeline {
         stage('Integration Tests on Staging'){
             steps {
                 echo "Stage: Integration Tests on Staging"
-                echo "Tool: Mabl
+                echo "Tool: Mabl"
             }
         }
         stage('Deploy to Production'){
             steps {
+                echo "Stage: Deploy to Production"
                 echo "Deploying code to the ${env.PRODUCTION_ENVIRONMENT} environment"
             }
         }
@@ -66,5 +67,6 @@ pipeline {
     }
 
 }
+
 
 
