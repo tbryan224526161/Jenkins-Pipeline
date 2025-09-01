@@ -14,18 +14,6 @@ pipeline {
                 echo "Tool: Maven"
                 
             }
-            post{
-                success{
-                    script {
-                        emailext(
-                    to: "tim.bryan.87@gmail.com",
-                    subject: "Jenkins-Pipeline - Build status email",
-                    body: "Build was successful!",
-                    attachLog: true
-                        )
-                    }
-                }
-            }
         }
         stage('Unit and Integration Tests'){
             steps {
@@ -65,8 +53,21 @@ pipeline {
         }
         
     }
+            post{
+                success{
+                    script {
+                        emailext(
+                    to: "tim.bryan.87@gmail.com",
+                    subject: "Jenkins-Pipeline - Build status email",
+                    body: "Build was successful!",
+                    attachLog: true
+                        )
+                    }
+                }
+            }
 
 }
+
 
 
 
