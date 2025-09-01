@@ -17,7 +17,8 @@ pipeline {
                 success{
                     mail to: "tim.bryan.87@gmail.com",
                     subject: "Build status email",
-                    body: "Build was successful!"
+                    body: "Build was successful!",
+                    attachLog: true
                 }
             }
         }
@@ -49,4 +50,5 @@ pipeline {
         }
         
     }
+
 }
