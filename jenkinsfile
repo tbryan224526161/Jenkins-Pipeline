@@ -3,22 +3,23 @@ pipeline {
     
     environment {
         DIRECTORY_PATH = '/home/jenkins'
-        TESTING_ENVIRONMENT = 'Staging'
-        PRODUCTION_ENVIRONMENT = 'Tim Bryan'
+        TESTING_ENVIRONMENT = 'Ansible'
+        PRODUCTION_ENVIRONMENT = 'AWS CodeDeploy'
     }
     
     stages {
         stage('Build'){
             steps {
-                echo "Fetching the source code from ${env.DIRECTORY_PATH}"
-                echo "Compile the code and generate any necessary artefacts"
+                echo "Stage: Build"
+                echo "Tool: Maven"
+                
             }
             post{
                 success{
                     script {
                         emailext(
                     to: "tim.bryan.87@gmail.com",
-                    subject: "Build status email",
+                    subject: "Jenkins-Pipeline - Build status email",
                     body: "Build was successful!",
                     attachLog: true
                         )
@@ -26,25 +27,34 @@ pipeline {
                 }
             }
         }
-        stage('Test'){
+        stage('Unit and Integration Tests'){
             steps {
-                echo "Unit tests"
-                echo "Integration tests"
+                echo "Stage: Unit and Integration Tests"
+                echo "Tool: JUnit"
             }
         }
-        stage('Code Quality Check'){
+        stage('Code Analysis'){
             steps {
-                echo "Checking the quality of the code"
+                echo "Stage: Code Analysis"
+                echo "Tool: SonarQube"
             }
         }
-        stage('Deploy'){
+        stage('Security Scan'){
             steps {
+                echo "Stage: Security Scan"
+                echo "Tool: OWASP Dependency-Check"
+            }
+        }
+        stage('Deploy to Staging'){
+            steps {
+                echo "Deploy to Staging"
                 echo "Deploying the application to ${env.TESTING_ENVIRONMENT}"
             }
         }
-        stage('Approval'){
+        stage('Integration Tests on Staging'){
             steps {
-                sleep 10
+                echo "Stage: Integration Tests on Staging"
+                echo "Tool: Mabl
             }
         }
         stage('Deploy to Production'){
@@ -56,4 +66,5 @@ pipeline {
     }
 
 }
+
 
